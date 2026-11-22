@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Langdock design tokens. The black scale and brand blue mirror the product's
+   Tailwind theme so generated apps look like Langdock rather than stock
+   shadcn. --primary-color is the fallback for the workspace brand colour,
+   which the host supplies at runtime (src/lib/theme.ts). */
+:root {
+  color-scheme: light;
+  --primary-color: 68 105 252;
+
+  --background: rgb(251 250 249);
+  --foreground: rgb(43 44 50);
+  --card: rgb(255 255 255);
+  --card-foreground: rgb(43 44 50);
+  --popover: rgb(255 255 255);
+  --popover-foreground: rgb(43 44 50);
+  --primary: rgb(var(--primary-color));
+  --primary-foreground: rgb(255 255 255);
+  --secondary: rgb(245 244 242);
+  --secondary-foreground: rgb(43 44 50);
+  --muted: rgb(241 240 238);
+  --muted-foreground: rgb(114 115 118);
+  --accent: rgb(245 244 242);
+  --accent-foreground: rgb(43 44 50);
+  --destructive: rgb(239 68 68);
+  --destructive-foreground: rgb(255 255 255);
+  --border: rgb(232 231 228);
+  --input: rgb(232 231 228);
+  --ring: rgb(var(--primary-color));
+  --radius: 0.5rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: rgb(31 32 38);
+  --foreground: rgb(245 244 242);
+  --card: rgb(43 44 50);
+  --card-foreground: rgb(245 244 242);
+  --popover: rgb(55 56 61);
+  --popover-foreground: rgb(245 244 242);
+  --primary: rgb(var(--primary-color));
+  --primary-foreground: rgb(255 255 255);
+  --secondary: rgb(55 56 61);
+  --secondary-foreground: rgb(245 244 242);
+  --muted: rgb(37 38 44);
+  --muted-foreground: rgb(161 161 163);
+  --accent: rgb(67 68 73);
+  --accent-foreground: rgb(245 244 242);
+  --destructive: rgb(239 68 68);
+  --destructive-foreground: rgb(255 255 255);
+  --border: rgb(255 255 255 / 0.1);
+  --input: rgb(255 255 255 / 0.15);
+  --ring: rgb(var(--primary-color));
+}
+
+/* The brand colour can have any lightness, so text on it is near-black on
+   light fills and white otherwise. */
+@supports (color: oklch(from red l c h)) {
+  :root,
+  .dark {
+    --primary-foreground: oklch(
+      from var(--primary) clamp(0.21, (0.72 - l) * 1000, 1) 0 0
+    );
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    margin: 0;
+    min-height: 100vh;
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}
+
+:root, .dark {
+  --art-e6b56c: #e6b56c; --art-e47b69: #e47b69; --art-8ca9ba: #8ca9ba; --art-68a8a0: #68a8a0;
+  --art-a98bb2: #a98bb2; --art-d2d3bd: #d2d3bd; --art-ee9a78: #ee9a78; --art-6aa8a6: #6aa8a6;
+  --art-d2c178: #d2c178; --art-8e83ae: #8e83ae; --art-e3e1cf: #e3e1cf; --art-d57970: #d57970;
+  --art-65a16e: #65a16e; --art-303d4d: #303d4d; --art-525365: #525365; --art-735a4d: #735a4d;
+  --art-313b37: #313b37; --art-70aeb0: #70aeb0; --art-d7e1d4: #d7e1d4; --art-647681: #647681;
+  --art-b36f63: #b36f63; --art-777d70: #777d70; --art-64708c: #64708c; --art-a17a5d: #a17a5d;
+  --art-665e7c: #665e7c; --art-c89a75: #c89a75; --art-d5bb8c: #d5bb8c; --art-b87969: #b87969;
+  --art-8e9b86: #8e9b86; --art-a49ba0: #a49ba0; --art-775f68: #775f68; --art-17252b: #17252b;
+  --art-d8c49b: #d8c49b; --art-3e5960: #3e5960; --art-efc276: #efc276; --art-6aabb0: #6aabb0;
+  --art-31474e: #31474e; --art-4e5556: #4e5556; --art-d9b866: #d9b866; --art-e96d9a: #e96d9a;
+  --art-f1cc82: #f1cc82; --art-283542: #283542; --art-283c3a: #283c3a; --art-9b7955: #9b7955;
+  --art-377c60: #377c60; --art-4f9b6c: #4f9b6c; --art-79ad70: #79ad70; --art-263b42: #263b42;
+  --art-e1e3d2: #e1e3d2; --art-d5c996: #d5c996; --art-6cabb0: #6cabb0; --art-222c35: #222c35;
+  --art-e3e4d7: #e3e4d7; --art-282c31: #282c31; --art-f2d89a: #f2d89a; --art-202c35: #202c35;
+  --art-303943: #303943; --art-85b9b6: #85b9b6; --art-f8e6ae: #f8e6ae; --art-20252b: #20252b;
+  --art-d75e68: #d75e68; --art-6db0ba: #6db0ba; --art-26322e: #26322e; --art-e3bc69: #e3bc69;
+  --art-d89b79: #d89b79; --art-3c3033: #3c3033; --art-f1d488: #f1d488; --art-748b68: #748b68;
+  --art-71886a: #71886a; --art-78906d: #78906d; --art-83946c: #83946c; --art-397c84: #397c84;
+  --art-347780: #347780; --art-62a6a0: #62a6a0; --art-b2a987: #b2a987; --art-363e48: #363e48;
+  --art-e6d9ac: #e6d9ac; --art-ffe18a: #ffe18a; --art-d77d6e: #d77d6e; --art-5ba1a0: #5ba1a0;
+  --art-303a48: #303a48; --art-efd687: #efd687; --art-f1cb7c: #f1cb7c; --art-f1e4bb: #f1e4bb;
+  --art-4e5e58: #4e5e58; --art-66766a: #66766a; --art-5d6e62: #5d6e62; --art-baa787: #baa787;
+  --art-26353d: #26353d; --art-f0d293: #f0d293; --art-bd8b68: #bd8b68; --art-e0c58d: #e0c58d;
+  --art-465660: #465660; --art-e3bb70: #e3bb70; --art-b34f82: #b34f82; --art-729c98: #729c98;
+  --art-d4b474: #d4b474; --art-27343d: #27343d; --art-7b9b88: #7b9b88; --art-b78968: #b78968;
+  --art-dccb9d: #dccb9d; --art-31424c: #31424c; --art-d7bf86: #d7bf86; --art-263a3f: #263a3f;
+  --art-5d795f: #5d795f; --art-424950: #424950; --art-be9273: #be9273; --art-f5e1ab: #f5e1ab;
+  --art-f3d792: #f3d792; --art-d0dccc: #d0dccc; --art-0d142d: #0d142d; --art-0d1620: #0d1620; --art-c5dadd: #c5dadd;
+}
+
